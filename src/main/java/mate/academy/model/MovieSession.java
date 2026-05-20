@@ -18,7 +18,7 @@ public class MovieSession {
     private Movie movie;
     @ManyToOne
     private CinemaHall cinemaHall;
-    private LocalDateTime showtime;
+    private LocalDateTime showTime;
 
     public Long getId() {
         return id;
@@ -44,12 +44,12 @@ public class MovieSession {
         this.cinemaHall = cinemaHall;
     }
 
-    public LocalDateTime getShowtime() {
-        return showtime;
+    public LocalDateTime getShowTime() {
+        return showTime;
     }
 
-    public void setShowtime(LocalDateTime showtime) {
-        this.showtime = showtime;
+    public void setShowTime(LocalDateTime showTime) {
+        this.showTime = showTime;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class MovieSession {
                 + "id=" + id
                 + ", movie=" + movie
                 + ", cinemaHall=" + cinemaHall
-                + ", showtime=" + showtime
+                + ", showtime=" + showTime
                 + '}';
     }
 }
