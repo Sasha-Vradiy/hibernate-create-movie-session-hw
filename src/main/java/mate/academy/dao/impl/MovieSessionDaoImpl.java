@@ -36,7 +36,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return Optional.ofNullable(session.get(MovieSession.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get a movie session by id: " + id);
+            throw new DataProcessingException("Can't get a movie session by id: " + id, e);
         }
     }
 
@@ -52,10 +52,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             query.setParameter("id", movieId);
             query.setParameter("start", startOfDay);
             query.setParameter("end", endOfDay);
-
-            // 4. Виконуємо запит і повертаємо список
             return query.getResultList();
-
         } catch (Exception e) {
             throw new DataProcessingException("Can't get available sessions for movie: "
                     + movieId + " on date: " + date, e);
