@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
 public class MovieSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
     @ManyToOne
-    Movie movie;
+    private Movie movie;
     @ManyToOne
-    CinemaHall cinemaHall;
-    LocalDateTime showTime;
+    private CinemaHall cinemaHall;
+    private LocalDateTime showtime;
 
     public Long getId() {
         return id;
@@ -51,8 +51,6 @@ public class MovieSession {
     public void setShowtime(LocalDateTime showtime) {
         this.showtime = showtime;
     }
-
-    LocalDateTime showtime;
 
     @Override
     public String toString() {

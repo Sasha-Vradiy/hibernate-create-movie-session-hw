@@ -1,5 +1,9 @@
 package mate.academy.dao.impl;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import mate.academy.dao.MovieSessionDao;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
@@ -8,10 +12,6 @@ import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 
 @Dao
 public class MovieSessionDaoImpl implements MovieSessionDao {
@@ -46,7 +46,8 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             LocalDateTime startOfDay = date.atStartOfDay();
             LocalDateTime endOfDay = date.atTime(java.time.LocalTime.MAX);
             Query<MovieSession> query = session.createQuery(
-                    "FROM MovieSession ms WHERE ms.movie.id = :id AND ms.showTime BETWEEN :start AND :end",
+                    "FROM MovieSession ms WHERE ms.movie.id "
+                            + "= :id AND ms.showTime BETWEEN :start AND :end",
                     MovieSession.class);
             query.setParameter("id", movieId);
             query.setParameter("start", startOfDay);
