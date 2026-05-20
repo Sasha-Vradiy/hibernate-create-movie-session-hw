@@ -6,6 +6,8 @@ import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
+import mate.academy.util.HibernateUtil;
+import org.hibernate.Session;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -24,6 +26,11 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> getAll() {
-        return null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("from Movie", Movie.class).getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Can't get all Movies", e);
+        }
     }
 }
+
